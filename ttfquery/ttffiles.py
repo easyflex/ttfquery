@@ -244,7 +244,7 @@ class Registry(object):
             raise TypeError( """Attempted to save %r to default file, no default file specified"""% (self,))
         if not hasattr( file, 'write'):
             file = open( file, 'wb' )
-        pickle.dump( self.specificFonts.values(), file, 1 )
+        pickle.dump( list(self.specificFonts.values()), file, 1 )
         return len(self.specificFonts)
     def load( self, file, clearFirst=1 ):
         """Attempt to load the font metadata from a pickled file
