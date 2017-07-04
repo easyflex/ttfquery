@@ -98,13 +98,12 @@ def linuxFontDirectories( ):
         ]
         
         set = []
-        def add( arg, directory, files):
-            set.append( directory )
         for directory in directories:
-            directory = directory = os.path.expanduser( os.path.expandvars(directory))
+            directory = os.path.expanduser( os.path.expandvars(directory))
             try:
                 if os.path.isdir( directory ):
-                    os.path.walk(directory, add, ())
+                    for directory, _, _ in os.walk(directory):
+                        set.append(directory)
             except (IOError, OSError, TypeError, ValueError):
                 pass
         return set
